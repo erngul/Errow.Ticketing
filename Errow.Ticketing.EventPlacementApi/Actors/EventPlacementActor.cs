@@ -12,6 +12,7 @@ public class EventPlacementActor(ActorHost host, DaprClient daprClient) : Actor(
     public async Task<EventPlacement> ReserveAsync(string seatId)
     {
         var ep = await daprClient.GetStateAsync<EventPlacement>(_stateStoreName, seatId);
+        
         if (ep is null)
         {
             throw new ArgumentException("Seat not found");
