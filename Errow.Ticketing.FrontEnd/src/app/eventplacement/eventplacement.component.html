@@ -1,0 +1,8 @@
+<div class="screen">Screen</div>
+<div class="seat-container">
+  <div class="seat-row" *ngFor="let row of eventplacements | slice:0:10; let i = index">
+    <div class="seat" *ngFor="let seat of eventplacements | slice:i*10:(i+1)*10" [class.premium]="i < 2" [class.reserved]="!seat.available" (click)="reservEeventplacement(seat.id)">
+      <span class="seat-number">{{ seat.row }}-{{ seat.column }}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+﻿services:
+  errow.ticketing.api:
+    image: errow.ticketing.api
+    build:
+      context: .
+      dockerfile: Errow.Ticketing.Api/Dockerfile
