@@ -1,9 +1,6 @@
-<h1>Angular Router App</h1>
-<nav>
-  <ul>
-    <li><a routerLink="/seats" routerLinkActive="active" ariaCurrentWhenActive="page">seats</a></li>
-    <li><a routerLink="/cart" routerLinkActive="active" ariaCurrentWhenActive="page">cart</a></li>
-  </ul>
-</nav>
+<mat-toolbar color="primary">
+  <button mat-stroked-button routerLink="/seats">Seats</button>
+  <button mat-stroked-button routerLink="/cart">Cart</button>
+</mat-toolbar>
 <!-- The routed views render in the <router-outlet>-->
 <router-outlet></router-outlet>

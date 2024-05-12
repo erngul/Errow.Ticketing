@@ -28,13 +28,10 @@ var app = builder.Build();
 app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
-app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseCors(static builder => 
     builder.AllowAnyMethod()
         .AllowAnyHeader()
@@ -43,5 +40,9 @@ app.UseCors(static builder =>
 app.MapControllers().WithOpenApi();
 
 app.MapActorsHandlers();
+
+app.UseAuthorization();
+
+app.UseHttpsRedirection();
 
 app.Run();

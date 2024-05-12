@@ -1,0 +1,32 @@
+mat-toolbar {
+  background-color: #0055a2; /* A deep blue, you can customize the color */
+  color: white;
+  padding: 10px 20px; /* Adjust padding for better spacing */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Soft shadow for depth */
+}
+
+button[mat-stroked-button] {
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Semi-transparent white border */
+  margin: 0 10px; /* Space between buttons */
+  padding: 5px 15px; /* Padding inside the button */
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transitions */
+}
+
+button[mat-stroked-button]:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Light background on hover */
+  border-color: white; /* Solid white border on hover */
+}
+
+@media (max-width: 768px) {
+  mat-toolbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  button[mat-stroked-button] {
+    margin: 5px 0; /* Stack buttons vertically with spacing */
+    width: 100%; /* Full width buttons */
+  }
+}

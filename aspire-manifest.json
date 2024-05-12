@@ -1,0 +1,100 @@
+{
+  "resources": {
+    "statestore": {
+      "type": "dapr.component.v0",
+      "daprComponent": {
+        "type": "state"
+      }
+    },
+    "eventplacementapi": {
+      "type": "project.v0",
+      "path": "Errow.Ticketing.EventPlacementApi/Errow.Ticketing.EventPlacementApi.csproj",
+      "env": {
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY": "in_memory",
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http",
+          "external": true
+        },
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http",
+          "external": true
+        }
+      }
+    },
+    "eventplacementapi-dapr": {
+      "type": "dapr.v0",
+      "dapr": {
+        "application": "eventplacementapi",
+        "appId": "eventplacementapi",
+        "components": [
+          "statestore"
+        ]
+      }
+    },
+    "cartapi": {
+      "type": "project.v0",
+      "path": "Errow.Ticketing.CartApi/Errow.Ticketing.CartApi.csproj",
+      "env": {
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY": "in_memory",
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http",
+          "external": true
+        },
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http",
+          "external": true
+        }
+      }
+    },
+    "cartapi-dapr": {
+      "type": "dapr.v0",
+      "dapr": {
+        "application": "cartapi",
+        "appId": "cartapi",
+        "components": [
+          "statestore"
+        ]
+      }
+    },
+    "angular": {
+      "type": "dockerfile.v0",
+      "path": "Errow.Ticketing.FrontEnd/Dockerfile",
+      "context": "Errow.Ticketing.FrontEnd",
+      "env": {
+        "NODE_ENV": "production",
+        "services__eventplacementapi__http__0": "{eventplacementapi.bindings.http.url}",
+        "services__eventplacementapi__https__0": "{eventplacementapi.bindings.https.url}",
+        "services__cartapi__http__0": "{cartapi.bindings.http.url}",
+        "services__cartapi__https__0": "{cartapi.bindings.https.url}",
+        "PORT": "{angular.bindings.https.targetPort}"
+      },
+      "bindings": {
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http",
+          "targetPort": 8000,
+          "external": true
+        }
+      }
+    }
+  }
+}

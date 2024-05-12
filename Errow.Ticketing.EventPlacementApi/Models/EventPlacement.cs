@@ -6,7 +6,7 @@ namespace Errow.Ticketing.EventPlacementApi.Models
     public class EventPlacement
     {
         [DataMember]
-        public string Id { get; set; }
+        public string? Id { get; set; }
         [DataMember]
         public int Row { get; set; }
         [DataMember]

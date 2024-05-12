@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: Errow.Ticketing
+services:  
+  app:
+    language: dotnet
+    project: .\Errow.Ticketing.AppHost\Errow.Ticketing.AppHost.csproj
+    host: containerapp

@@ -1,5 +1,6 @@
 ﻿using Dapr.Actors;
 using Dapr.Actors.Client;
+using Dapr.Actors.Runtime;
 using Errow.Ticketing.EventPlacementApi.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ public class EventPlacementController(IEventPlacementService eventPlacementServi
     public async Task<IActionResult> ReserveSeat(string seatId)
     {
         var actorId = new ActorId(seatId);
+        // var actorTime = new ActorTimer("EventPlacementActor", actorId, "EventPlacementActor", "ReserveAsync", null, TimeSpan.Zero, TimeSpan.FromMinutes(1));
         var eventPlacementActor = actorProxyFactory.CreateActorProxy<IEventPlacementActor>(actorId, "EventPlacementActor");
         var result = await eventPlacementActor.ReserveAsync(seatId);
         return Ok(new { Result = result });
@@ -20,7 +22,7 @@ public class EventPlacementController(IEventPlacementService eventPlacementServi
     
     [HttpGet]
     public async Task<IActionResult> GetAvailableSeats()
-    { 
+    {
         var availableSeats = await eventPlacementService.GetAvailableEventPlacementAsync();
         return Ok(availableSeats);
     }
