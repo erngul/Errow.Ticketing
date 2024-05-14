@@ -1,6 +1,5 @@
 ﻿using Dapr.Actors;
 using Dapr.Actors.Client;
-using Dapr.Actors.Runtime;
 using Errow.Ticketing.EventPlacementApi.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +17,15 @@ public class EventPlacementController(IEventPlacementService eventPlacementServi
         var eventPlacementActor = actorProxyFactory.CreateActorProxy<IEventPlacementActor>(actorId, "EventPlacementActor");
         var result = await eventPlacementActor.ReserveAsync(seatId);
         return Ok(new { Result = result });
+    }
+    
+    [HttpDelete("reserve/{seatId}")]
+    public async Task<IActionResult> CancelReservation(string seatId)
+    {
+        var actorId = new ActorId(seatId);
+        var eventPlacementActor = actorProxyFactory.CreateActorProxy<IEventPlacementActor>(actorId, "EventPlacementActor");
+        await eventPlacementActor.CancelReservationAsync(seatId);
+        return Ok();
     }
     
     [HttpGet]

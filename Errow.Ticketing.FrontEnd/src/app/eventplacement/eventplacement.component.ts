@@ -32,7 +32,7 @@ export class eventplacementComponent implements OnInit {
   }
 
   reservEeventplacement(id: string): void {
-    this.httpClient.post(`/api/eventplacement/reserve/${id}`, {}).subscribe((data: any) => {
+    this.httpClient.post(`/api/cart/add/${id}`, {}).subscribe((data: any) => {
       let index = this.eventplacements.findIndex(eventplacement => eventplacement.id === id);
       if (index !== -1) {
         this.eventplacements[index].available = false;

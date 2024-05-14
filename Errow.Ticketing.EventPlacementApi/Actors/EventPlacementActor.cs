@@ -1,17 +1,19 @@
-﻿using System.Text.Json;
-using Dapr.Actors.Runtime;
+﻿using Dapr.Actors.Runtime;
+using Dapr.Client;
 using Errow.Ticketing.EventPlacementApi.Interfaces;
 using Errow.Ticketing.EventPlacementApi.Models;
 
 namespace Errow.Ticketing.EventPlacementApi.Actors;
 
-public class EventPlacementActor(ActorHost host) : Actor(host), IEventPlacementActor
+public class EventPlacementActor(ActorHost host, DaprClient daprClient) : Actor(host), IEventPlacementActor
 {
     private EventPlacement _ep = new EventPlacement();
+    private readonly string _stateStoreName = "statestore";
+
 
     public async Task<EventPlacement> ReserveAsync(string seatId)
     {
-        _ep = await this.StateManager.GetStateAsync<EventPlacement>("ep");
+        _ep = await daprClient.GetStateAsync<EventPlacement>(_stateStoreName , host.Id.ToString());
 
         if (_ep is null)
         {
@@ -24,20 +26,27 @@ public class EventPlacementActor(ActorHost host) : Actor(host), IEventPlacementA
         }
 
         _ep.Available = false;
-        await this.StateManager.SetStateAsync("ep", _ep);
+        await daprClient.SaveStateAsync(_stateStoreName, host.Id.ToString(), _ep);
 
         return _ep;
     }
-
-    public async Task CreateAsync(EventPlacement eventPlacement)
-    {
-        var test = Id.GetId();
-        await this.StateManager.SetStateAsync("ep", eventPlacement);
-    }
     
-    public async Task<EventPlacement> GetStateAsync()
+    public async Task CancelReservationAsync(string seatId)
     {
-        return await StateManager.GetStateAsync<EventPlacement>("ep");
+        _ep = await daprClient.GetStateAsync<EventPlacement>(_stateStoreName , host.Id.ToString());
+
+        if (_ep is null)
+        {
+            throw new ArgumentException("Seat not found");
+        }
+
+        if (_ep.Available)
+        {
+            throw new ArgumentException("Seat is already available");
+        }
+
+        _ep.Available = true;
+        await daprClient.SaveStateAsync(_stateStoreName, host.Id.ToString(), _ep);
     }
 
     // class TimerParams

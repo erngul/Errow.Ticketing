@@ -1,3 +1,4 @@
+using Errow.Ticketing.CartApi.Actors;
 using Errow.Ticketing.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,17 +14,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
+builder.Services.AddActors(options =>
+{
+    options.Actors.RegisterActor<CartActor>();
+});
 
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
-
-// Configure the HTTP request pipeline.
-// if (app.Environment.IsDevelopment())
-// {
-//     app.UseSwagger();
-//     app.UseSwaggerUI();
-// }
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -34,6 +32,8 @@ app.UseCors(static builder =>
         .AllowAnyOrigin());
 
 app.MapControllers().WithOpenApi();
+
+app.MapActorsHandlers();
 
 app.UseAuthorization();
 

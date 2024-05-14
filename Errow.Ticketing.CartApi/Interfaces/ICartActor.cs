@@ -1,4 +1,5 @@
 ﻿using Dapr.Actors;
+using Errow.Ticketing.EventPlacementApi.Models;
 
 namespace Errow.Ticketing.CartApi.Interfaces;
 

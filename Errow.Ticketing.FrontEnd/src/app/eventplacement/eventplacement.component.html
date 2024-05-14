@@ -6,19 +6,17 @@
     </div>
   </div>
 </div>
-
-<mat-card>
-  <mat-card-content>
-    <h2 class="example-h2">Result</h2>
-
-    <section class="example-section">
-      <mat-progress-bar
-        class="example-margin"
-        [color]="color"
-        [mode]="'query'"
-        [value]="value"
-        [bufferValue]="bufferValue">
-      </mat-progress-bar>
-    </section>
-  </mat-card-content>
-</mat-card>
+<div class="legend">
+  <div class="legend-item">
+    <span class="seat example available"></span>
+    <span class="description">Available</span>
+  </div>
+  <div class="legend-item">
+    <span class="seat example reserved"></span>
+    <span class="description">Reserved</span>
+  </div>
+  <div class="legend-item">
+    <span class="seat example premium"></span>
+    <span class="description">Premium</span>
+  </div>
+</div>

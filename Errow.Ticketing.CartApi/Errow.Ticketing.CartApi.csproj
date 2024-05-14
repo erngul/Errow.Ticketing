@@ -11,11 +11,13 @@
         <PackageReference Include="Dapr.Actors.AspNetCore" Version="1.13.1" />
         <PackageReference Include="Dapr.AspNetCore" Version="1.13.1" />
         <PackageReference Include="Dapr.Workflow" Version="1.13.1" />
+        <PackageReference Include="Flurl.Http" Version="4.0.2" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.4" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Errow.TIcketing.Contracts\Errow.TIcketing.Contracts.csproj" />
         <ProjectReference Include="..\Errow.Ticketing.ServiceDefaults\Errow.Ticketing.ServiceDefaults.csproj" />
     </ItemGroup>
 

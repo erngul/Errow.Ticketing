@@ -5,9 +5,8 @@ namespace Errow.Ticketing.EventPlacementApi.Interfaces;
 
 public interface IEventPlacementActor : IActor
 {
-    Task<EventPlacement> GetStateAsync();
     Task<EventPlacement> ReserveAsync(string seatId);
-    Task CreateAsync(EventPlacement eventPlacement);
+    Task CancelReservationAsync(string seatId);
     // /// <summary>
     // /// Registers a timer.
     // /// </summary>
