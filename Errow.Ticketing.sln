@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Errow.Ticketing.CartApi", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Errow.Ticketing.ServiceDefaults", "Errow.Ticketing.ServiceDefaults\Errow.Ticketing.ServiceDefaults.csproj", "{E6E99D52-DFB5-4F16-9071-5869C631CFA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Errow.TIcketing.Contracts", "Errow.TIcketing.Contracts\Errow.TIcketing.Contracts.csproj", "{938B6CC2-562A-48F8-844A-76B5ABD90354}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Errow.Ticketing.Contracts", "Errow.Ticketing.Contracts\Errow.Ticketing.Contracts.csproj", "{938B6CC2-562A-48F8-844A-76B5ABD90354}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

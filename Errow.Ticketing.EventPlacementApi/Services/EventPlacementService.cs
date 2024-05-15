@@ -1,6 +1,6 @@
 ﻿using Dapr.Client;
+using Errow.Ticketing.Contracts.Models;
 using Errow.Ticketing.EventPlacementApi.Interfaces;
-using Errow.Ticketing.EventPlacementApi.Models;
 
 namespace Errow.Ticketing.EventPlacementApi.Services;
 

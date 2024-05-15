@@ -1,5 +1,5 @@
 ﻿using Dapr.Actors;
-using Errow.Ticketing.EventPlacementApi.Models;
+using Errow.Ticketing.Contracts.Models;
 
 namespace Errow.Ticketing.EventPlacementApi.Interfaces;
 
@@ -7,6 +7,8 @@ public interface IEventPlacementActor : IActor
 {
     Task<EventPlacement> ReserveAsync(string seatId);
     Task CancelReservationAsync(string seatId);
+
+    Task<EventPlacement> GetEventPlacementAsync(string seatId);
     // /// <summary>
     // /// Registers a timer.
     // /// </summary>

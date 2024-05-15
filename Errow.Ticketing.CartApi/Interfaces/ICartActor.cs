@@ -1,11 +1,12 @@
 ﻿using Dapr.Actors;
-using Errow.Ticketing.EventPlacementApi.Models;
+using Errow.Ticketing.Contracts.Models;
 
 namespace Errow.Ticketing.CartApi.Interfaces;
 
 public interface ICartActor : IActor
 {
-    Task AddToCartAsync(string seatId);
-    Task RemoveFromCartAsync(string seatId);
-    Task<List<string>> GetCartAsync();
+    Task AddToCartAsync(string epId);
+    Task RemoveFromCartAsync(string epId);
+    Task<Cart> GetCartAsync();
+    Task ClearCartAsync();
 }

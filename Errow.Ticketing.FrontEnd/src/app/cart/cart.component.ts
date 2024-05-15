@@ -1,22 +1,32 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {NgForOf, NgIf} from "@angular/common";
+import { Component, inject, OnInit } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { NgForOf, NgIf } from "@angular/common";
+import { CommonModule } from '@angular/common';
+import { CountdownTimerComponent } from '../countdown-timer/countdown-timer.component';
+
+interface CartItem {
+  eventPlacementId: string;
+  dueDateTime: Date;
+  CreatedDateTime: Date;
+}
 
 @Component({
   selector: 'app-cart',
   standalone: true,
   imports: [
     NgIf,
-    NgForOf
+    NgForOf,
+    CommonModule,
+    CountdownTimerComponent
   ],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css'
+  styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  httpClient: HttpClient = inject(HttpClient);
-  data: string = '';
+  private httpClient: HttpClient = inject(HttpClient);
 
-  cartItems: string[] = [];
+  cartItems: CartItem[] = [];
+  public dueDate: Date = new Date('2024-12-31T23:59:59');
 
   ngOnInit(): void {
     this.getCartItems();
@@ -24,7 +34,7 @@ export class CartComponent implements OnInit {
 
   getCartItems(): void {
     this.httpClient.get<any>('/api/cart').subscribe((data: any) => {
-      this.cartItems = data.result;
+      this.cartItems = data.result.items;
     });
   }
 
@@ -32,5 +42,9 @@ export class CartComponent implements OnInit {
     this.httpClient.post(`/api/cart/remove/${seatId}`, {}).subscribe(() => {
       this.getCartItems();
     });
+  }
+
+  onCountdownFinished(): void {
+    location.reload(); // Refresh the page
   }
 }

@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Errow.TIcketing.Contracts\Errow.TIcketing.Contracts.csproj" />
+        <ProjectReference Include="..\Errow.Ticketing.Contracts\Errow.Ticketing.Contracts.csproj" />
         <ProjectReference Include="..\Errow.Ticketing.ServiceDefaults\Errow.Ticketing.ServiceDefaults.csproj" />
     </ItemGroup>
 

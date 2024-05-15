@@ -1,4 +1,5 @@
-﻿using Errow.Ticketing.EventPlacementApi.Models;
+﻿
+using Errow.Ticketing.Contracts.Models;
 
 namespace Errow.Ticketing.EventPlacementApi.Interfaces;
 
